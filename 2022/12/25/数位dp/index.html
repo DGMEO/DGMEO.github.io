@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>数位dp记忆化搜索 | 绊缘の博客</title><meta name="author" content="绊缘,1729990469@qq.com"><meta name="copyright" content="绊缘"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="总结一点对于数位dp记忆化搜索的理解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数位dp记忆化搜索">
+<meta property="og:url" content="https://dgmeo.github.io/2022/12/25/%E6%95%B0%E4%BD%8Ddp/index.html">
+<meta property="og:site_name" content="绊缘の博客">
+<meta property="og:description" content="总结一点对于数位dp记忆化搜索的理解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/63a867cb08b683016398fc99.jpg">
+<meta property="article:published_time" content="2022-12-25T14:55:54.353Z">
+<meta property="article:modified_time" content="2022-12-25T15:18:29.448Z">
+<meta property="article:author" content="绊缘">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="数位dp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/63a867cb08b683016398fc99.jpg"><link rel="shortcut icon" href="/img/tit.png"><link rel="canonical" href="https://dgmeo.github.io/2022/12/25/%E6%95%B0%E4%BD%8Ddp/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 绊缘","link":"链接: ","source":"来源: 绊缘の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数位dp记忆化搜索',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-25 23:18:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://pic.imgdb.cn/item/63a32be1b1fccdcd36878acc.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-television"></i><span> 娱乐</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.imgdb.cn/item/63a866a708b683016396e828.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">绊缘の博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-television"></i><span> 娱乐</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数位dp记忆化搜索</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-25T14:55:54.353Z" title="发表于 2022-12-25 22:55:54">2022-12-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-25T15:18:29.448Z" title="更新于 2022-12-25 23:18:29">2022-12-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ACM/">ACM</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ACM/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/ACM/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E6%95%B0%E4%BD%8Ddp/">数位dp</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数位dp记忆化搜索"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h3>
+<p>科协里最近很流行数字游戏。</p>
+<p>某人命名了一种不降数，这种数字必须满足从左到右各位数字呈非下降关系，如<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>123</mn><mi mathvariant="normal">，</mi><mn>446</mn></mrow><annotation encoding="application/x-tex">123，446</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">2</span><span class="mord">3</span><span class="mord cjk_fallback">，</span><span class="mord">4</span><span class="mord">4</span><span class="mord">6</span></span></span></span>。</p>
+<p>现在大家决定玩一个游戏，指定一个整数闭区间 [a,b]，问这个区间内有多少个不降数。</p>
+<h4 id="输入样例"><a class="markdownIt-Anchor" href="#输入样例"></a> 输入样例</h4>
+<p>输入包含多组测试数据。</p>
+<p>每组数据占一行，包含两个整数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 9</span><br><span class="line">1 19</span><br></pre></td></tr></table></figure>
+<h4 id="输出样例"><a class="markdownIt-Anchor" href="#输出样例"></a> 输出样例</h4>
+<p>每行给出一组测试数据的答案，即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[a,b]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">b</span><span class="mclose">]</span></span></span></span>之间有多少不降数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">9</span><br><span class="line">18</span><br></pre></td></tr></table></figure>
+<hr />
+<ol>
+<li>你需要先理解dp的循环迭代写法，不理解的话可以<a target="_blank" rel="noopener" href="https://www.acwing.com/solution/content/33446/">点击这里</a></li>
+<li>你需要对数位dp的记忆化搜索有个大概的了解，参考<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1rS4y1s721/">视频19:30处开始</a></li>
+</ol>
+<hr />
+<center>
+<font color="#614ad3" size=5 align="center">记忆化搜索+数位dp</font>
+</center>
+<blockquote>
+<p>记忆化搜索模板其实是将原来循环迭代的数位dp解法的 <code>动态规划</code> 与 <code>枚举数位</code>过程结合在一起。</p>
+</blockquote>
+<p>比如说可以参考 <a target="_blank" rel="noopener" href="https://www.acwing.com/solution/content/139799/">这位大佬</a> 的题解的&quot;记忆化搜索&quot;(其实是可以把两个函数写在一起)的 <code>init函数</code> 与 <code>dfs函数</code> 合并写成</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> len, <span class="type">int</span> last, <span class="type">bool</span> limit)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!len) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 记住每次都要在函数体外面将f里所有元素先赋初值-1</span></span><br><span class="line">    <span class="keyword">if</span> (!limit  &amp;&amp; f[len + <span class="number">1</span>][last] != <span class="number">-1</span>) <span class="keyword">return</span> f[len + <span class="number">1</span>][last];</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> up = limit ? nums[len] : <span class="number">9</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = last; i &lt;= up; i ++) ans += <span class="built_in">dfs</span>(len - <span class="number">1</span>, i, limit &amp;&amp; i == up);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> limit ? ans : f[len + <span class="number">1</span>][last] = ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<center>
+<font color="#614ad3" size=4 align="center">代码的解释</font>
+</center>
+<blockquote>
+<p>变量含义的解释</p>
+</blockquote>
+<ul>
+<li><code>nums[]</code> : 里面存储的是<code>n</code>的每一位数字，<code>nums[1]</code> 存的是 <code>个位</code>，<code>nums[2]</code> 是 <code>十位</code>,…</li>
+<li><code>len</code> : 表示 <code>n</code> 有 <code>几位数</code>.</li>
+<li><code>f[i][j]</code> : 满足<code>当前数有i位，且最高位的数字为j</code>的数字的个数</li>
+<li><code>dfs(int len, int last, bool limit)</code> : 还有<code>len个位置需要填</code>，<code>len + 1 位置填了last</code>，且此时状态为<code>limit</code> 时 <code>填数的方案数</code></li>
+<li><code>limit</code> :
+<ul>
+<li><code>limit == 1</code> 则当前可填的数字必须处于[0,nums[len]]的区间</li>
+<li><code>limit == 0</code> 则当前可填的数字无限制，处于[0,9]的区间</li>
+<li>比如说要我们枚举 <code>1 - n</code> 的数字，如果<code>n = 123</code>
+<ul>
+<li><code>_ _ _</code> 刚填数时，<code>limit == 1</code>，因为第一个空只能填 <code>0，1</code> ，<code>否则会大于n</code></li>
+<li><code>0 _ _</code> 假如第一个填的是0，<code>limit == 0</code>，因为第二个空我们能填 <code>0-9</code></li>
+<li>实现limit的转化是代码中 <code>limit &amp;&amp; i == up</code> ，可以先思考一下，等下详细说明(●’◡’●)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>up</code> : 当前位置我们能填的数字的上限
+<ul>
+<li><code>limit == 1</code> 时，我们能填的数最大不能超过 <code>n</code> 当前位置上的数字,也就是 <code>up == nums[len]</code></li>
+<li><code>limit == 0</code> 时，填的数字无限制 <code>up == 9</code></li>
+</ul>
+</li>
+<li><code>ans</code> : 当前状态下方案数</li>
+</ul>
+<blockquote>
+<p>函数中一些语句的解释</p>
+</blockquote>
+<ul>
+<li><code>if (!len) return 1</code> : <code>len == 0</code> 意味着数字已经填完，说明这是一种合法方案，所以返回1</li>
+<li><code>if (!limit &amp;&amp; f[len + 1][last] != -1) return f[len + 1][last];</code> : 这是记忆化搜索的主要函数，必须是 <code>limit == 0</code> 时才能返回 <code>f[len + 1][last]</code>,这是因为我们的f表示的是在填数字是可以从 0-9 中任意挑选时的方案数，所以首先要 <code>limit == 0</code></li>
+<li><code>ans += dfs(len - 1, i, limit &amp;&amp; i == up)</code> : 转移方程</li>
+<li><code>limit &amp;&amp; i == up</code> : 一些解释
+<ul>
+<li>如果在枚举之前的数位时 <code>limit == 0</code> 那么后面的数位就可以 <code>随便填 0 - 9</code>的数字</li>
+<li>如果上一次 <code>limit == 1</code> 且当前 <code>i == up</code>(表示这次填的也是n数位上某个数字) ，说明下一位数填的时候还是存在限制.</li>
+</ul>
+</li>
+<li><code>return limit ? ans : f[len + 1][last] = ans</code> : 这里同<code>函数语句解释的第二条</code>，只要当<code>limit == 0</code> 时我们才做记忆化搜索过程，唯有<code>f[][]</code>表示的状态是在<code>没有limit限制下</code>,才能保证它里面一直存储的是正确的值</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1084/">数字游戏</a>应该算是最简洁的数位dp问题，可以先好好琢磨透这题，再去思考其他的，有关数位dp记忆化搜所更深入的分析可以参考<a target="_blank" rel="noopener" href="https://www.acwing.com/blog/content/7944/">这位大佬的博客</a></p>
+<p>希望能对你有所帮助(～￣▽￣)～</p>
+<hr />
+<h4 id="完整ac代码针对f的定义不同代码上关于f的地方会稍有改变"><a class="markdownIt-Anchor" href="#完整ac代码针对f的定义不同代码上关于f的地方会稍有改变"></a> 完整AC代码(针对f的定义不同代码上关于f的地方会稍有改变)</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">35</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> f[N][N], nums[N];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> len, <span class="type">int</span> last, <span class="type">bool</span> limit)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!len) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (!limit  &amp;&amp; f[len + <span class="number">1</span>][last] != <span class="number">-1</span>) <span class="keyword">return</span> f[len + <span class="number">1</span>][last];</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> up = limit ? nums[len] : <span class="number">9</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = last; i &lt;= up; i ++) ans += <span class="built_in">dfs</span>(len - <span class="number">1</span>, i, limit &amp;&amp; i == up);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> limit ? ans : f[len + <span class="number">1</span>][last] = ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">solve</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> len = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="keyword">sizeof</span> f);</span><br><span class="line">    <span class="keyword">while</span> (n) nums[++ len] = n % <span class="number">10</span>, n /= <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">dfs</span>(len, <span class="number">0</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> l, r;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; l &gt;&gt; r) </span><br><span class="line">        cout &lt;&lt; <span class="built_in">solve</span>(r) - <span class="built_in">solve</span>(l - <span class="number">1</span>) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://DGMEO.github.io/">绊缘</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://dgmeo.github.io/2022/12/25/%E6%95%B0%E4%BD%8Ddp/">https://dgmeo.github.io/2022/12/25/数位dp/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://DGMEO.github.io" target="_blank">绊缘の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E4%BD%8Ddp/">数位dp</a></div><div class="post_share"><div class="social-share" data-image="https://pic.imgdb.cn/item/63a867cb08b683016398fc99.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/12/25/Codeforces-55D-Beautiful%20numbers/"><img class="prev-cover" src="https://pic.imgdb.cn/item/63a868b608b68301639a73c5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Codeforces-55D-Beautiful numbers</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/22/AVL/"><img class="next-cover" src="https://pic.imgdb.cn/item/63a3305cb1fccdcd369060c4.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">AVL树模板</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/12/25/Codeforces-55D-Beautiful%20numbers/" title="Codeforces-55D-Beautiful numbers"><img class="cover" src="https://pic.imgdb.cn/item/63a868b608b68301639a73c5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-25</div><div class="title">Codeforces-55D-Beautiful numbers</div></div></a></div><div><a href="/2022/12/17/%E6%A3%8B%E7%9B%98%E5%BC%8F%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/" title="棋盘式状态压缩"><img class="cover" src="https://pic.imgdb.cn/item/639dd19ab1fccdcd36c7baf5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-17</div><div class="title">棋盘式状态压缩</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text"> 题目描述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B"><span class="toc-number">1.1.</span> <span class="toc-text"> 输入样例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B"><span class="toc-number">1.2.</span> <span class="toc-text"> 输出样例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4ac%E4%BB%A3%E7%A0%81%E9%92%88%E5%AF%B9f%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8D%E5%90%8C%E4%BB%A3%E7%A0%81%E4%B8%8A%E5%85%B3%E4%BA%8Ef%E7%9A%84%E5%9C%B0%E6%96%B9%E4%BC%9A%E7%A8%8D%E6%9C%89%E6%94%B9%E5%8F%98"><span class="toc-number">1.3.</span> <span class="toc-text"> 完整AC代码(针对f的定义不同代码上关于f的地方会稍有改变)</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://pic.imgdb.cn/item/63a866a708b683016396e828.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 绊缘</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js"></script><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', { class: 'katex-wrap'})
+  })
+})()</script></div><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><script data-pjax defer src="https://npm.elemecdn.com/tzy-blog/lib/js/theme/chocolate.js"></script><script async src="https://npm.elemecdn.com/tzy-blog/lib/js/other/sakura.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
